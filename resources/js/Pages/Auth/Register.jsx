@@ -69,7 +69,7 @@ export default function Register() {
                         name="role"
                         value={data.role}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="role"
                         onChange={(e) => setData('role', e.target.value)}
                         required
                     />
