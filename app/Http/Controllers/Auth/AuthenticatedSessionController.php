@@ -32,10 +32,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $role = strtolower($request->user()->role ?? '');
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(match ($role) {
+            'patient' => route('patient'),
+            'tandarts' => route('tandarts'),
+            'mondhygienist' => route('mondhygienist'),
+            'assistent' => route('assistent'),
+            'praktijkmanagement' => route('praktijkmanagement'),
+            default => route('welcome'),
+        });
     }
-
     /**
      * Destroy an authenticated session.
      */
