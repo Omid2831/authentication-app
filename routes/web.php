@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MondhygiënistController;
 use App\Http\Controllers\TandartsController;
+use App\Http\Controllers\AssistentController;
+use App\Http\Controllers\MondhygiënistController;
 use App\Http\Controllers\PraktijkmanagementController;
 
 Route::get('/', function () {
@@ -22,13 +23,18 @@ Route::get('/', function () {
 // Patient dashboard
 Route::get('/Patient', [PatientController::class, 'dashboard'])
 ->name('patient.dashboard')
-->middleware('auth', 'role:patient');
+->middleware('auth', 'role:patient,praktijkmanagement');
+
+// Assistent dashboard
+Route::get('/Assistent', [AssistentController::class, 'dashboard'])
+->name('assistent.dashboard')
+->middleware('auth', 'role:assistent,praktijkmanagement');
 
 
 // Mondhygienist dashbord
 Route::get('/Mondhygienist', [MondhygiënistController::class, 'dashboard'])
 ->name('mondhygienist.dashboard')
-->middleware('auth', 'role:mondhygienist');
+->middleware('auth', 'role:mondhygienist,praktijkmanagement');
 
 
 // praktijkmanagement dashboard 
@@ -39,7 +45,7 @@ Route::get('/PraktijkmanagementDashboard', [PraktijkmanagementController::class,
 // Tanddarts dashboard
 Route::get('/TandartsDashboard', [TandartsController::class, 'dashboard'])
     ->name('tandarts.dashboard')
-    ->middleware(['auth', 'role:tandarts']);
+    ->middleware(['auth', 'role:tandarts,praktijkmanagement']);
 
 // Dashboard
 Route::get('/dashboard', function () {

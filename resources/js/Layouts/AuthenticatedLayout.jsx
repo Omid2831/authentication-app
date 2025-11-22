@@ -12,13 +12,10 @@ export default function AuthenticatedLayout({ header, children }) {
         useState(false);
 
     // Helper to get dashboard route and label by role
-    const getDashboardRoute = () => {
+    const getDashboardRoutes = () => {
         switch (user.role) {
-            case 'patient':
-                return { route: 'patient.dashboard', label: 'Patient' };
-            case 'mondhygienist':
-                return { route: 'mondhygienist.dashboard', label: 'Mondhygiënist' };
             case 'praktijkmanagement':
+                // Return ALL routes
                 return [
                     { route: 'praktijkmanagement.dashboard', label: 'Praktijkmanagement' },
                     { route: 'patient.dashboard', label: 'Patient' },
@@ -26,15 +23,35 @@ export default function AuthenticatedLayout({ header, children }) {
                     { route: 'tandarts.dashboard', label: 'Tandarts' },
                     { route: 'assistent.dashboard', label: 'Assistent' },
                 ];
+
+            case 'patient':
+                return [
+                    { route: 'patient.dashboard', label: 'Patient' },
+                ];
+
+            case 'mondhygienist':
+                return [
+                    { route: 'mondhygienist.dashboard', label: 'Mondhygiënist' },
+                ];
+
             case 'tandarts':
-                return { route: 'tandarts.dashboard', label: 'Tandarts' };
+                return [
+                    { route: 'tandarts.dashboard', label: 'Tandarts' },
+                ];
+
             case 'assistent':
-                return { route: 'assistent.dashboard', label: 'Assistent' };
+                return [
+                    { route: 'assistent.dashboard', label: 'Assistent' },
+                ];
+
             default:
-                return { route: 'dashboard', label: 'Dashboard' };
+                return [
+                    { route: 'dashboard', label: 'Dashboard' },
+                ];
         }
     };
-    const dashboard = getDashboardRoute();
+
+    const dashboard = getDashboardRoutes();
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -56,14 +73,16 @@ export default function AuthenticatedLayout({ header, children }) {
                                     Dashboard
                                 </NavLink>
                                 {/* Role-specific homepage link, only if not default */}
-                                {dashboard.route !== 'dashboard' && (
+                                {dashboard.map((item) => (
                                     <NavLink
-                                        href={route(dashboard.route)}
-                                        active={route().current(dashboard.route)}
+                                        key={item.route}
+                                        href={route(item.route)}
+                                        active={route().current(item.route)}
                                     >
-                                        {dashboard.label}
+                                        {item.label}
                                     </NavLink>
-                                )}
+                                ))}
+
                             </div>
                         </div>
 
@@ -169,14 +188,16 @@ export default function AuthenticatedLayout({ header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                         {/* Role-specific homepage link, only if not default */}
-                        {dashboard.route !== 'dashboard' && (
-                            <ResponsiveNavLink
-                                href={route(dashboard.route)}
-                                active={route().current(dashboard.route)}
+                        {dashboard.map((item) => (
+                            <NavLink
+                                key={item.route}
+                                href={route(item.route)}
+                                active={route().current(item.route)}
                             >
-                                {dashboard.label}
-                            </ResponsiveNavLink>
-                        )}
+                                {item.label}
+                            </NavLink>
+                        ))}
+
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">

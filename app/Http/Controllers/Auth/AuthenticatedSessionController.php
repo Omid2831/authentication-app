@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
             'mondhygienist' => route('mondhygienist.dashboard'),
             'assistent' => route('assistent.dashboard'),
             'praktijkmanagement' => route('praktijkmanagement.dashboard'),
-            default => route('welcome'),
+            default => route('Welcome'),
         });
     }
     /**
