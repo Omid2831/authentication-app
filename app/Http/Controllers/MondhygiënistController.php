@@ -3,22 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
-class TandartsController extends Controller
+class MondhygiënistController extends Controller
 {
-    /**
-     * Show tandarts dashboard page.
-     */
-    public function dashboard()
-    {
-        return Inertia::render('features/Tandarts/TandartsDashboard', ['title' => 'Tandarts']);
-    }
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
-
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.

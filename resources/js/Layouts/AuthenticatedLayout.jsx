@@ -1,7 +1,7 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import ApplicationLogo from '@/shared/Components/ApplicationLogo';
+import Dropdown from '@/shared/Components/Dropdown';
+import NavLink from '@/shared/Components/NavLink';
+import ResponsiveNavLink from '@/shared/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -10,6 +10,23 @@ export default function AuthenticatedLayout({ header, children }) {
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+
+    // Helper to get dashboard route and label by role
+    const getDashboardRoute = () => {
+        switch (user.role) {
+            case 'patient':
+                return { route: 'patient.dashboard', label: 'Patient' };
+            case 'mondhygiënist':
+                return { route: 'mondhygiënist.dashboard', label: 'Mondhygiënist' };
+            case 'praktijkmanagement':
+                return { route: 'praktijkmanagement.dashboard', label: 'Praktijkmanagement' };
+            case 'tandarts':
+                return { route: 'tandarts.dashboard', label: 'Tandarts' };
+            default:
+                return { route: 'dashboard', label: 'Dashboard' };
+        }
+    };
+    const dashboard = getDashboardRoute();
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -30,6 +47,15 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Dashboard
                                 </NavLink>
+                                {/* Role-specific homepage link, only if not default */}
+                                {dashboard.route !== 'dashboard' && (
+                                    <NavLink
+                                        href={route(dashboard.route)}
+                                        active={route().current(dashboard.route)}
+                                    >
+                                        {dashboard.label}
+                                    </NavLink>
+                                )}
                             </div>
                         </div>
 
@@ -134,6 +160,15 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        {/* Role-specific homepage link, only if not default */}
+                        {dashboard.route !== 'dashboard' && (
+                            <ResponsiveNavLink
+                                href={route(dashboard.route)}
+                                active={route().current(dashboard.route)}
+                            >
+                                {dashboard.label}
+                            </ResponsiveNavLink>
+                        )}
                     </div>
 
                     <div className="border-t border-gray-200 pb-1 pt-4">
