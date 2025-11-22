@@ -19,8 +19,11 @@ Route::get('/', function () {
 });
 
 
+// Patient dashboard
+Route::get('/Patient', [PatientController::class, 'dashboard'])
+->name('patient.dashboard')
+->middleware('auth', 'role:patient');
 
-// Route::get('/patient', [PatientController::class, 'dashboard'])->name('patient.dashboard');
 // Route::get('/mondhygiënist', [MondhygiënistController::class, 'dashboard'])->name('mondhygiënist.dashboard');
 
 

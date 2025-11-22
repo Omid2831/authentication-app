@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
+      /**
+     * Show PatientDashboard dashboard page.
+     */
+    public function dashboard()
+    {
+        return Inertia::render('features/Patient/PatientDashboard', ['title' => 'PatientDashboard']);
+    }
     /**
      * Display a listing of the resource.
      */
