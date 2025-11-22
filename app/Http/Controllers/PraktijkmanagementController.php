@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class PraktijkmanagementController extends Controller
 {
+     /**
+     * Show Praktijkmanagement dashboard page.
+     */
+    public function dashboard()
+    {
+        return Inertia::render('features/Praktijkmanagement/PraktijkmanagementDashboard', ['title' => 'Praktijkmanagement']);
+    }
     /**
      * Display a listing of the resource.
      */

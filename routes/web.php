@@ -22,7 +22,12 @@ Route::get('/', function () {
 
 // Route::get('/patient', [PatientController::class, 'dashboard'])->name('patient.dashboard');
 // Route::get('/mondhygiënist', [MondhygiënistController::class, 'dashboard'])->name('mondhygiënist.dashboard');
-// Route::get('/praktijkmanagement', [PraktijkmanagementController::class, 'dashboard'])->name('praktijkmanagement.dashboard');
+
+
+// praktijkmanagement dashboard 
+Route::get('/PraktijkmanagementDashboard', [PraktijkmanagementController::class, 'dashboard'])
+    ->name('praktijkmanagement.dashboard')
+    ->middleware(['auth', 'role:praktijkmanagement']);
 
 // Tanddarts dashboard
 
