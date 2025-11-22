@@ -24,7 +24,11 @@ Route::get('/Patient', [PatientController::class, 'dashboard'])
 ->name('patient.dashboard')
 ->middleware('auth', 'role:patient');
 
-// Route::get('/mondhygiënist', [MondhygiënistController::class, 'dashboard'])->name('mondhygiënist.dashboard');
+
+// Mondhygienist dashbord
+Route::get('/Mondhygienist', [MondhygiënistController::class, 'dashboard'])
+->name('mondhygienist.dashboard')
+->middleware('auth', 'role:mondhygienist');
 
 
 // praktijkmanagement dashboard 
@@ -33,11 +37,11 @@ Route::get('/PraktijkmanagementDashboard', [PraktijkmanagementController::class,
     ->middleware(['auth', 'role:praktijkmanagement']);
 
 // Tanddarts dashboard
-
 Route::get('/TandartsDashboard', [TandartsController::class, 'dashboard'])
     ->name('tandarts.dashboard')
     ->middleware(['auth', 'role:tandarts']);
 
+// Dashboard
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

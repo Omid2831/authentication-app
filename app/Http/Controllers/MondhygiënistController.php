@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class MondhygiënistController extends Controller
 {
+
+    /**
+     * Show MondhygienistDashboard dashboard page.
+     */
+    public function dashboard()
+    {
+        return Inertia::render('features/Mondhygienist/MondhygienistDashboard', ['title' => 'MondhygienistDashboard']);
+    }
+
     /**
      * Display a listing of the resource.
      */

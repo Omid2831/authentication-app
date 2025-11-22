@@ -16,12 +16,20 @@ export default function AuthenticatedLayout({ header, children }) {
         switch (user.role) {
             case 'patient':
                 return { route: 'patient.dashboard', label: 'Patient' };
-            case 'mondhygiënist':
-                return { route: 'mondhygiënist.dashboard', label: 'Mondhygiënist' };
+            case 'mondhygienist':
+                return { route: 'mondhygienist.dashboard', label: 'Mondhygiënist' };
             case 'praktijkmanagement':
-                return { route: 'praktijkmanagement.dashboard', label: 'Praktijkmanagement' };
+                return [
+                    { route: 'praktijkmanagement.dashboard', label: 'Praktijkmanagement' },
+                    { route: 'patient.dashboard', label: 'Patient' },
+                    { route: 'mondhygienist.dashboard', label: 'Mondhygiënist' },
+                    { route: 'tandarts.dashboard', label: 'Tandarts' },
+                    { route: 'assistent.dashboard', label: 'Assistent' },
+                ];
             case 'tandarts':
                 return { route: 'tandarts.dashboard', label: 'Tandarts' };
+            case 'assistent':
+                return { route: 'assistent.dashboard', label: 'Assistent' };
             default:
                 return { route: 'dashboard', label: 'Dashboard' };
         }
