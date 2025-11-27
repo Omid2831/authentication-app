@@ -54,9 +54,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Role Management dashboard RoleManagementDashboard
-Route::get('/RoleManagementDashboard', [RoleManagement::class, 'dashboard'])
+Route::get('/RoleManagementDashboard', [RoleManagement::class, 'index'])
     ->middleware(['auth', 'role:praktijkmanagement'])
     ->name('rolemanagement.dashboard');
+
+// Role Management - deleting a record from the database
+Route::delete('/users/{id}', [RoleManagement::class, 'destroy'])
+    ->name('users.destroy');
+
+// Role Managment - Updating the data from the table
+Route::put('/users/{id}',[RoleManagement::class, 'update'])
+->name('users.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
             'tandarts' => route('tandarts.dashboard'),
             'mondhygienist' => route('mondhygienist.dashboard'),
             'assistent' => route('assistent.dashboard'),
-            'praktijkmanagement' => route('praktijkmanagement.dashboard') && route('rolemanamgement.dashboard'),
+            'praktijkmanagement' => route('praktijkmanagement.dashboard'),
             default => route('Welcome'),
         });
     }

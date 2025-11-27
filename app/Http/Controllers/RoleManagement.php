@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,23 @@ class RoleManagement extends Controller
     public function dashboard()
     {
         return Inertia::render('features/Roles/RoleManagementDashboard', ['title' => 'Role Management']);
+    }
+
+    /**
+     * Display the list of users.
+     */
+    public function index()
+    {
+        $users = User::select('id', 'name', 'email', 'role')->get();
+
+        // Return 404 if no users found
+        if ($users->isEmpty()) {
+            return abort(404, 'Users not found');
+        }
+
+        return Inertia::render('features/Roles/RoleManagementDashboard', [
+            'users' => $users
+        ]);
     }
 
     /**
@@ -50,16 +68,37 @@ class RoleManagement extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+       
+        $validated = $request->validate([
+            'role' => 'required|string|max:20'
+        ]); // validate the update the data
+
+        
+        $user = User::findOrfail($id);// Check weather if it fails or not
+
+        $user->role = $validated['role']; // Update the role
+       
+        $user->save();  // then dave the user record
+
+      
+        return redirect()->back();  // return us to the overview page
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // check weather the user fails
+        $user = User::findOrfail($id);
+
+        // delete the user after finding the id
+        $user->delete();
+
+        return redirect()->back();
     }
 }
