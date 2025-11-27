@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import React from 'react'
 
 
-const RoleManagment = (props) => {
+const RoleManagementDashboard = (props) => {
   return (
     <AuthenticatedLayout
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{props.title} Dashboard</h2>}
@@ -11,4 +11,4 @@ const RoleManagment = (props) => {
   )
 }
 
-export default RoleManagment
+export default RoleManagementDashboard;

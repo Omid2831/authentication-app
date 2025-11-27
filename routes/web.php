@@ -9,6 +9,7 @@ use App\Http\Controllers\TandartsController;
 use App\Http\Controllers\AssistentController;
 use App\Http\Controllers\MondhygiënistController;
 use App\Http\Controllers\PraktijkmanagementController;
+use App\Http\Controllers\RoleManagement;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -22,27 +23,27 @@ Route::get('/', function () {
 
 // Patient dashboard
 Route::get('/Patient', [PatientController::class, 'dashboard'])
-->name('patient.dashboard')
-->middleware('auth', 'role:patient,praktijkmanagement');
+    ->name('patient.dashboard')
+    ->middleware('auth', 'role:patient,praktijkmanagement');
 
 // Assistent dashboard
 Route::get('/Assistent', [AssistentController::class, 'dashboard'])
-->name('assistent.dashboard')
-->middleware('auth', 'role:assistent,praktijkmanagement');
+    ->name('assistent.dashboard')
+    ->middleware('auth', 'role:assistent,praktijkmanagement');
 
 
 // Mondhygienist dashbord
 Route::get('/Mondhygienist', [MondhygiënistController::class, 'dashboard'])
-->name('mondhygienist.dashboard')
-->middleware('auth', 'role:mondhygienist,praktijkmanagement');
+    ->name('mondhygienist.dashboard')
+    ->middleware('auth', 'role:mondhygienist,praktijkmanagement');
 
 
-// praktijkmanagement dashboard 
+// praktijkmanagement dashboard
 Route::get('/PraktijkmanagementDashboard', [PraktijkmanagementController::class, 'dashboard'])
     ->name('praktijkmanagement.dashboard')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
-// Tanddarts dashboard
+// Tandarts dashboard
 Route::get('/TandartsDashboard', [TandartsController::class, 'dashboard'])
     ->name('tandarts.dashboard')
     ->middleware(['auth', 'role:tandarts,praktijkmanagement']);
@@ -51,6 +52,11 @@ Route::get('/TandartsDashboard', [TandartsController::class, 'dashboard'])
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Role Management dashboard RoleManagementDashboard
+Route::get('/RoleManagementDashboard', [RoleManagement::class, 'dashboard'])
+    ->middleware(['auth', 'role:praktijkmanagement'])
+    ->name('rolemanagement.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-class RoleManagment extends Controller
+class RoleManagement extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function dashboard()
     {
-        return Inertia::render('features/Roles/RoleManagment', [
-            'title' => 'RoleManagment'
-        ]);
+        return Inertia::render('features/Roles/RoleManagementDashboard', ['title' => 'Role Management']);
     }
 
     /**

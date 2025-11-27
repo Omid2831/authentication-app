@@ -18,6 +18,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 // Return ALL routes
                 return [
                     { route: 'praktijkmanagement.dashboard', label: 'Praktijkmanagement' },
+                    { route: 'rolemanagement.dashboard', label: 'Role Management' },
                     { route: 'patient.dashboard', label: 'Patient' },
                     { route: 'mondhygienist.dashboard', label: 'Mondhygiënist' },
                     { route: 'tandarts.dashboard', label: 'Tandarts' },
