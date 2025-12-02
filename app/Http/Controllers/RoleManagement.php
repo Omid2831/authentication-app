@@ -21,10 +21,12 @@ class RoleManagement extends Controller
      */
     public function index()
     {
-        $users = User::select('id', 'name', 'email', 'role')->get();
+        $users = User::select('id', 'name', 'email', 'role')
+        ->where('role' , '!=', 'praktijkmanagement')
+        ->get();
 
         // Return 404 if no users found
-        if ($users->isEmpty()) {
+        if (!$users) {
             return abort(404, 'Users not found');
         }
 
@@ -70,19 +72,19 @@ class RoleManagement extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+
         $validated = $request->validate([
             'role' => 'required|string|max:20'
         ]); // validate the update the data
 
-        
-        $user = User::findOrfail($id);// Check weather if it fails or not
+
+        $user = User::findOrfail($id); // Check weather if it fails or not
 
         $user->role = $validated['role']; // Update the role
-       
+
         $user->save();  // then dave the user record
 
-      
+
         return redirect()->back();  // return us to the overview page
 
 
