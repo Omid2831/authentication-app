@@ -27,27 +27,27 @@ export default function AuthenticatedLayout({ header, children }) {
 
             case 'patient':
                 return [
-                    { route: 'patient.dashboard', label: 'Patient' },
+                    { route: 'patient.dashboard', label: 'Patient', index: true },
                 ];
 
             case 'mondhygienist':
                 return [
-                    { route: 'mondhygienist.dashboard', label: 'Mondhygiënist' },
+                    { route: 'mondhygienist.dashboard', label: 'Mondhygiënist', index: true },
                 ];
 
             case 'tandarts':
                 return [
-                    { route: 'tandarts.dashboard', label: 'Tandarts' },
+                    { route: 'tandarts.dashboard', label: 'Tandarts', index: true },
                 ];
 
             case 'assistent':
                 return [
-                    { route: 'assistent.dashboard', label: 'Assistent' },
+                    { route: 'assistent.dashboard', label: 'Assistent', index: true },
                 ];
 
             default:
                 return [
-                    { route: 'dashboard', label: 'Dashboard' },
+                    { route: 'dashboard', label: 'Dashboard', index: true },
                 ];
         }
     };
