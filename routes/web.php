@@ -48,6 +48,7 @@ Route::get('/TandartsDashboard', [TandartsController::class, 'dashboard'])
     ->name('tandarts.dashboard')
     ->middleware(['auth', 'role:tandarts,praktijkmanagement']);
 
+
 // Dashboard
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -62,9 +63,14 @@ Route::get('/RoleManagementDashboard', [RoleManagement::class, 'index'])
 Route::delete('/users/{id}', [RoleManagement::class, 'destroy'])
     ->name('users.destroy');
 
+// Role Management - show user details
+Route::get('/users/{id}/show', [RoleManagement::class, 'show'])
+    ->middleware(['auth', 'role:praktijkmanagement'])
+    ->name('users.show');
+
 // Role Managment - Updating the data from the table
-Route::put('/users/{id}',[RoleManagement::class, 'update'])
-->name('users.update');
+Route::put('/users/{id}', [RoleManagement::class, 'update'])
+    ->name('users.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

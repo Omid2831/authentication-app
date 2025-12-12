@@ -21,9 +21,9 @@ class RoleManagement extends Controller
      */
     public function index()
     {
-        $users = User::select('id', 'name', 'email', 'role')
-        ->where('role' , '!=', 'praktijkmanagement')
-        ->get();
+        $users = User::select('id', 'name', 'email', 'role', 'created_at', 'updated_at')
+            ->where('role', '!=', 'praktijkmanagement')
+            ->get();
 
         // Return 404 if no users found
         if (!$users) {
@@ -56,7 +56,12 @@ class RoleManagement extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::select('id', 'name', 'email', 'role', 'created_at', 'updated_at')
+            ->findOrFail($id);
+
+        return Inertia::render('features/Roles/UserShow', [
+            'user' => $user
+        ]);
     }
 
     /**
