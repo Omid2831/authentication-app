@@ -26,6 +26,11 @@ const OverView = ({ users }) => {
     });
   };
 
+  // Helper to show user details
+  const handleShow = (userId) => {
+    router.get(route('users.show', { id: userId }));
+  }
+
   return (
     <section className="mx-auto mt-8 max-w-4xl px-4">
       <h2 className="text-gray-700 text-3xl sm:text-4xl font-semibold mb-6 text-center">
@@ -77,7 +82,9 @@ const OverView = ({ users }) => {
                       className="px-2 py-1 text-black border-2 border-black bg-white shadow-[2px_2px_0px_black] hover:bg-gray-100">
                       Edit
                     </Button>
-                    <Button className="px-2 py-1 text-black border-2 border-black bg-white shadow-[2px_2px_0px_black] hover:bg-gray-100">
+                    <Button
+                      onClick={() => handleShow(user.id)}
+                      className="px-2 py-1 text-black border-2 border-black bg-white shadow-[2px_2px_0px_black] hover:bg-gray-100">
                       Show
                     </Button>
                     <Button
