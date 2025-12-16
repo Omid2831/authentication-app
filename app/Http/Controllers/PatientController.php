@@ -12,7 +12,7 @@ class PatientController extends Controller
      */
     public function dashboard()
     {
-        return Inertia::render('features/Patient/PatientDashboard', ['title' => 'PatientDashboard']);
+        return Inertia::render('features/Patient/PatientDashboard', ['title' => 'Patient']);
     }
     
     /**

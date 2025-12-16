@@ -62,23 +62,6 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="role" value="Role" />
-
-                    <TextInput
-                        id="role"
-                        type="text"
-                        name="role"
-                        value={data.role}
-                        className="mt-1 block w-full"
-                        autoComplete="role"
-                        onChange={(e) => setData('role', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.role} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
