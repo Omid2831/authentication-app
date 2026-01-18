@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PraktijkmanagementController extends Controller
 {
-     /**
+    /**
      * Show Praktijkmanagement dashboard page.
      */
     public function dashboard()
@@ -68,5 +68,18 @@ class PraktijkmanagementController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     *  manage praktijkmanagement roles.
+     */
+    public function manageRoles()
+    {
+        $users  =  $this->userModel->getAllUsersWithPraktijkmanagementRole(Auth::id());
+
+        return Inertia::render('features/Praktijkmanagement/PraktijkmanagementDashboard', [
+            'title' => 'Manage Praktijkmanagement Roles',
+            'users' => $users,
+        ]);
     }
 }
