@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PraktijkmanagementController extends Controller
 {
-     /**
+    protected $userModel;
+
+    public function __construct(User $userModel)
+    {
+        $this->userModel = $userModel;
+    }
+
+    /**
      * Show Praktijkmanagement dashboard page.
      */
     public function dashboard()
@@ -68,5 +77,18 @@ class PraktijkmanagementController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     *  manage praktijkmanagement roles.
+     */
+    public function manageRoles()
+    {
+        $users  =  $this->userModel->getAllUsersWithPraktijkmanagementRole(Auth::id());
+
+        return Inertia::render('features/Praktijkmanagement/PraktijkmanagementDashboard', [
+            'title' => 'Manage Praktijkmanagement Roles',
+            'users' => $users,
+        ]);
     }
 }

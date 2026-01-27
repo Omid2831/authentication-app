@@ -46,4 +46,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get all users with praktijkmanagement role.
+     *
+     * @param int $praktijkmanagerId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllUsersWithPraktijkmanagementRole(int $praktijkmanagerId)
+    {
+        return User::where('id', '!=', $praktijkmanagerId)->get();
+    }
 }
