@@ -43,6 +43,11 @@ Route::get('/PraktijkmanagementDashboard', [PraktijkmanagementController::class,
     ->name('praktijkmanagement.dashboard')
     ->middleware(['auth', 'role:praktijkmanagement']);
 
+// praktijkmanagement manage roles
+Route::get('/PraktijkmanagementManageRoles', [PraktijkmanagementController::class, 'manageRoles'])
+    ->name('praktijkmanagement.manageRoles')
+    ->middleware(['auth', 'role:praktijkmanagement']);
+
 // Tandarts dashboard
 Route::get('/TandartsDashboard', [TandartsController::class, 'dashboard'])
     ->name('tandarts.dashboard')
